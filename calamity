@@ -1,0 +1,965 @@
+repeat wait() until game:IsLoaded()
+
+if not LPH_OBFUSCATED then
+    LPH_JIT_MAX = function(...)
+        return (...)
+    end
+    LPH_NO_VIRTUALIZE = function(...)
+        return (...)
+    end
+end
+
+LPH_JIT_MAX(function()
+
+local Script = {Functions = {}, Friends = {}, Drawing = {}}
+local Calamity = getgenv().Calamity
+local SilentAimHitParts = Calamity.SilentAim.HitParts
+local AimAssistHitParts = Calamity.AimAssist.HitParts
+local OldSilentAimPart = Calamity.SilentAim.HitParts
+local OldAimAssistPart = Calamity.AimAssist.HitParts
+local IgnoredParts = Calamity.SilentAim.IgnoredParts
+local IgnoredParts2 = Calamity.AimAssist.IgnoredParts
+local Players, Client, Mouse, RS, Camera, GuiS, Uis, Ran =
+game:GetService("Players"),
+game:GetService("Players").LocalPlayer,
+game:GetService("Players").LocalPlayer:GetMouse(),
+game:GetService("RunService"),
+game:GetService("Workspace").CurrentCamera,
+game:GetService("GuiService"),
+game:GetService("UserInputService"),
+math.random
+
+local Target
+local Aimplace
+
+if not Calamity.Preload then
+    Client:Kick("You are missing Preload in your table. Please make sure your table is the updated one.")
+elseif not Calamity.Universal then
+    Client:Kick("You are missing Universal in your table. Please make sure your table is the updated one.")
+elseif not Calamity.SilentAim then
+    Client:Kick("You are missing SilentAim in your table. Please make sure your table is the updated one.")
+elseif not Calamity.AimAssist then
+    Client:Kick("You are missing AimAssist in your table. Please make sure your table is the updated one.")
+elseif not Calamity.Checks then
+    Client:Kick("You are missing Checks in your table. Please make sure your table is the updated one.")
+elseif not Calamity.FOV then
+    Client:Kick("You are missing FOV in your table. Please make sure your table is the updated one.")
+elseif not Calamity.Resolver then
+    Client:Kick("You are missing Resolver in your table. Please make sure your table is the updated one.")
+elseif not Calamity.Misc then
+    Client:Kick("You are missing Misc in your table. Please make sure your table is the updated one.")
+elseif not Calamity.TriggerBot then
+    Client:Kick("You are missing TriggerBot in your table. Please make sure your table is the updated one.")
+elseif not Calamity.Safety then
+    Client:Kick("You are missing Safety in your table. Please make sure your table is the updated one.")
+elseif not Calamity.FrameSkip then
+    Client:Kick("You are missing FrameSkip in your table. Please make sure your table is the updated one.")
+elseif not Calamity.GunSettings then
+    Client:Kick("You are missing GunSettings in your table. Please make sure your table is the updated one.")
+elseif not Calamity.ESP then
+    Client:Kick("You are missing ESP in your table. Please make sure your table is the updated one.")
+elseif not Calamity.Antilock then
+    Client:Kick("You are missing Antilock in your table. Please make sure your table is the updated one.")
+elseif not Calamity.AutoPrediction then
+    Client:Kick("You are missing AutoPrediction in your table. Please make sure your table is the updated one.")
+end
+
+if Calamity.Misc.FPSUnlocker.Enabled then
+    setfpscap(Calamity.Misc.FPSUnlocker.FPS)
+end
+
+if Calamity.Misc.Settings.AutoLowGFX then
+wait(0.4)
+for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part"
+or v.ClassName == "SpawnLocation"
+or v.ClassName == "WedgePart"
+or v.ClassName == "Terrain"
+or v.ClassName == "MeshPart" then
+v.Material = "Plastic"
+end
+end
+end
+
+if Calamity.Misc.Settings.RemoveSeats then
+for i,v in next, workspace:GetDescendants() do
+    if v:IsA('Seat') then
+        v:Destroy()
+    end
+end
+end
+
+if Calamity.Misc.Settings.MuteBoombox then
+for i,v in pairs(workspace:GetDescendants()) do
+	if v:IsA('Sound') then
+		v.Playing = false
+	end
+end
+end
+
+if Calamity.Misc.Settings.AutoReload then
+RS.Stepped:Connect(LPH_JIT_MAX(function()
+    pcall(function()
+        if game:GetService("Players").LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Ammo").Value == 0 then
+            game:GetService("ReplicatedStorage").MainEvent:FireServer("Reload", game:GetService("Players").LocalPlayer.Character:FindFirstChildWhichIsA("Tool"))
+        end
+    end)
+end))
+end
+
+local function mousepos()
+    if game.PlaceId == 2788229376 or game.PlaceId == 4106313503 or game.PlaceId == 12442317726 then
+        return "UpdateMousePos"
+    elseif game.PlaceId == 5602055394 or game.PlaceId == 7951883376 then
+        return "MousePos"
+    elseif game.PlaceId == 9825515356 then
+        return "GetMousePos"
+    elseif game.PlaceId == 14472848239 then
+    	return "MoonUpdateMousePos"
+    else
+        return "UpdateMousePos"
+    end
+end
+
+if Calamity.Resolver.AntiAimViewer then
+ 
+local DeepFakePosition = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nosssa/NossLock/main/GetRealMousePosition"))() 
+task.wait()
+
+local Game = setmetatable({}, {
+   __index = function(Company, Service)
+       return game:GetService(Service)
+   end})
+ 
+local MainEvent = Game.ReplicatedStorage:FindFirstChild("MainEvent") or nil
+local Event = nil
+ 
+Script.Functions.Bypass = LPH_NO_VIRTUALIZE(function(Player)
+   local KimJongUn = Player.ChildAdded:Connect(function(Child)
+       if Child:IsA("Tool") then
+           Event = Child.Activated:Connect(function()
+               if MainEvent then
+                   MainEvent:FireServer(mousepos(), Mouse.Hit.Position)
+               end
+           end)
+       end
+   end)
+end)
+ 
+Script.Functions.PlayerAlive = LPH_NO_VIRTUALIZE(function(Player)
+   return Player and Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character:FindFirstChild("Head") or false
+end)
+ 
+Client.CharacterAdded:Connect(function(NewClient)
+   Script.Functions.Bypass(NewClient)
+end)
+ 
+if Script.Functions.PlayerAlive(Client) then
+   Script.Functions.Bypass(Client.Character)
+end
+ 
+local Hook
+Hook = hookmetamethod(game, "__namecall", LPH_NO_VIRTUALIZE(function(self, ...)
+   local Args = {...}
+ 
+   if not checkcaller() and getnamecallmethod() == "FireServer" and self.Name == "MainEvent" and Args[1] == mousepos() then
+ 
+       Args[2] = _G.FetchPosition()
+       
+       return self.FireServer(self, unpack(Args))
+   end
+   
+   return Hook(self, ...)
+end))
+end
+
+Script.Functions.RayCastCheck = LPH_NO_VIRTUALIZE(function(Part, PartDescendant)
+    local Character = Client.Character or Client.CharacterAdded.Wait(Client.CharacterAdded)
+    local Origin = Camera.CFrame.Position
+
+    local RayCastParams = RaycastParams.new()
+    RayCastParams.FilterType = Enum.RaycastFilterType.Blacklist
+    RayCastParams.FilterDescendantsInstances = {Character, Camera}
+
+    local Result = Workspace.Raycast(Workspace, Origin, Part.Position - Origin, RayCastParams)
+    
+    if (Result) then
+        local PartHit = Result.Instance
+        local Visible = (not PartHit or Instance.new("Part").IsDescendantOf(PartHit, PartDescendant))
+        
+        return Visible
+    end
+    return false
+end)
+
+Script.Functions.CalculateChance = LPH_NO_VIRTUALIZE(function(Percentage)
+    Percentage = math.floor(Percentage)
+    local chance = math.floor(Random.new().NextNumber(Random.new(), 0, 1) * 100) / 100
+
+    return chance < Percentage / 100
+end)
+
+Script.Functions.FirstPerson = LPH_NO_VIRTUALIZE(function(Setting)
+    if Setting.FirstPerson and not Setting.ThirdPerson then
+        if (Camera.CFrame.p - Camera.Focus.p).Magnitude < 0.7 then
+            return true
+        else
+            return false
+        end
+    elseif Setting.FirstPerson and Setting.ThirdPerson then
+        return true
+    end
+    return true
+end)
+ 
+Script.Functions.ThirdPerson = LPH_NO_VIRTUALIZE(function(Setting)
+    if Setting.ThirdPerson and not Setting.FirstPerson then
+        if (Camera.CFrame.p - Camera.Focus.p).Magnitude > 0.7 then
+            return true
+        else
+            return false
+        end
+    elseif Setting.FirstPerson and Setting.ThirdPerson then
+        return true
+    end
+    return true
+end)
+
+Script.Functions.Knocked = LPH_NO_VIRTUALIZE(function(a)
+    if game.PlaceId == 10355218822 or game.PlaceId == 12154107359 then
+        if Calamity.Checks.Knocked then
+            if a:FindFirstChild("DEAD") ~= nil or a.Health < 3 then
+                return false
+            else
+                return true
+            end
+        else
+            return true
+        end
+    elseif game.PlaceId == 12442317726 then
+        if Calamity.Checks.Knocked then
+            if a:FindFirstChild("BodyEffects")["KO"].Value == false then
+                return true
+            else
+                return false
+            end
+        else
+            return true
+        end
+    else
+        if Calamity.Checks.Knocked then
+            if a:FindFirstChild("BodyEffects")["K.O"].Value == false then
+                return true
+            else
+                return false
+            end
+        else
+            return true
+        end
+    end
+end)
+
+Script.Functions.Grabbed = LPH_NO_VIRTUALIZE(function(a)
+    if Calamity.Checks.Grabbed then
+        if a:FindFirstChild("GRABBING_CONSTRAINT") ~= nil then
+            return false
+        else
+            return true
+        end
+    else
+        return true
+    end
+end)
+
+Script.Functions.ForceField = LPH_NO_VIRTUALIZE(function(a)
+    if Calamity.Checks.ForceField then
+        if not (a:FindFirstChildOfClass("ForceField")) then
+            return true
+        else
+            return false
+        end
+    else
+        return true
+    end
+end)
+
+Script.Functions.Reloading = LPH_NO_VIRTUALIZE(function()
+        if game.PlaceId ~= 9825515356 then
+            if Client.Character.BodyEffects.Reload.Value == false then
+                return true
+            else
+                return false
+            end
+        else
+            if Client.Character.BodyEffects.Reloading.Value == false then
+                return true
+            else
+                return false
+            end
+        end
+end)
+
+Script.Functions.FindCrew = LPH_NO_VIRTUALIZE(function(Player)
+	if Player:FindFirstChild("DataFolder") and Player.DataFolder:FindFirstChild("Information") and Player.DataFolder.Information:FindFirstChild("Crew") and Client:FindFirstChild("DataFolder") and Client.DataFolder:FindFirstChild("Information") and Client.DataFolder.Information:FindFirstChild("Crew") then
+        if Client.DataFolder.Information:FindFirstChild("Crew").Value ~= nil and Player.DataFolder.Information:FindFirstChild("Crew").Value ~= nil and Player.DataFolder.Information:FindFirstChild("Crew").Value ~= "" and Client.DataFolder.Information:FindFirstChild("Crew").Value ~= "" then 
+			return true
+		end
+	end
+	return false
+end)
+
+Script.Functions.Alive = LPH_NO_VIRTUALIZE(function(a)
+if Calamity.Checks.Alive then
+    if a and a.Character and a.Character:FindFirstChild("HumanoidRootPart") ~= nil and a.Character:FindFirstChild("Humanoid") ~= nil and a.Character:FindFirstChild("Head") ~= nil and a.Character:FindFirstChildWhichIsA("Humanoid") and a.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 then
+        return true
+    end
+    return false
+end
+end)
+
+Script.Functions.AntiLockCheck = LPH_NO_VIRTUALIZE(function(targ)
+    if (targ.Character.HumanoidRootPart.Velocity.Y < -5 and targ.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall) or targ.Character.HumanoidRootPart.Velocity.Y < -50 then
+        return true
+    elseif targ and (targ.Character.HumanoidRootPart.Velocity.X > 35 or targ.Character.HumanoidRootPart.Velocity.X < -35) then
+        return true
+    elseif targ and targ.Character.HumanoidRootPart.Velocity.Y > 60 then
+        return true
+    elseif targ and (targ.Character.HumanoidRootPart.Velocity.Z > 35 or targ.Character.HumanoidRootPart.Velocity.Z < -35) then
+        return true
+    else
+        return false
+    end
+end)
+
+Script.Functions.WTS = LPH_NO_VIRTUALIZE(function(Object)
+    local ObjectVector = Camera:WorldToScreenPoint(Object.Position)
+    return Vector2.new(ObjectVector.X, ObjectVector.Y)
+end)
+    
+Script.Functions.IsOnScreen = LPH_NO_VIRTUALIZE(function(Object)
+    local IsOnScreen = Camera:WorldToScreenPoint(Object.Position)
+    return IsOnScreen
+end)
+    
+Script.Functions.FilterObjs = LPH_NO_VIRTUALIZE(function(Object)
+    if string.find(Object.Name, "Gun") then
+        return
+    end
+    if table.find({"Part", "MeshPart", "BasePart"}, Object.ClassName) then
+        return true
+    end
+end)
+
+Script.Functions.OnScreen = LPH_NO_VIRTUALIZE(function(Object)
+    local _, screen = Camera:WorldToScreenPoint(Object.Position)
+    return screen
+end)
+
+Script.Functions.GetMagnitudeFromMouse = LPH_NO_VIRTUALIZE(function(Part)
+    local PartPos, OnScreen = Camera:WorldToScreenPoint(Part.Position)
+    if OnScreen then
+        local Magnitude = (Vector2.new(PartPos.X, PartPos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+        return Magnitude
+    end
+    return math.huge
+end)
+
+Script.Functions.RandomVec = LPH_NO_VIRTUALIZE(function(Number, Multi)
+    return (Vector3.new(Ran(-Number, Number), Ran(-Number, Number), Ran(-Number, Number)) * Multi or 1)
+end)
+
+Script.Functions.GetClosest = LPH_NO_VIRTUALIZE(function(FOV)
+    local Target, Closest = nil, FOV * 3 or math.huge
+    local HitChance = Script.Functions.CalculateChance(Calamity.SilentAim.HitChance)
+   		if not HitChance then
+   			return nil
+   		end
+
+    for i,v in pairs(Players:GetPlayers()) do
+        if v.Character and v ~= Client and v.Character:FindFirstChild("HumanoidRootPart") then
+            if not Script.Functions.OnScreen(v.Character.HumanoidRootPart) then 
+                continue 
+            end
+            if Calamity.Checks.Visible and v.Character:FindFirstChild("Head") then
+                if v.Character.Head.Transparency > 0.5 then
+                    continue
+                end
+            end
+            if Calamity.Checks.Team then
+                if v.Team ~= Client.Team then
+                    continue
+                end
+            end
+            if Calamity.Checks.Crew and Script.Functions.FindCrew(v) and v.DataFolder.Information:FindFirstChild("Crew").Value == Client.DataFolder.Information:FindFirstChild("Crew").Value then
+                continue
+            end
+            local Distance = Script.Functions.GetMagnitudeFromMouse(v.Character.HumanoidRootPart)
+
+            if (Distance < Closest) and Script.Drawing.Circle.Radius + 10 > Distance and Script.Functions.RayCastCheck(v.Character.HumanoidRootPart, v.Character) and Script.Functions.FirstPerson(Calamity.SilentAim) and Script.Functions.ThirdPerson(Calamity.SilentAim) and Script.Functions.Grabbed(v.Character) and Script.Functions.ForceField(v.Character) and Script.Functions.Knocked(v.Character) and Script.Functions.Alive(v) then
+                Closest = Distance
+                Target = v
+            end
+        end
+    end
+   
+    return Target
+end)
+
+Script.Functions.GetClosest2 = LPH_NO_VIRTUALIZE(function(FOV)
+    local Target, Closest = nil, FOV * 3 or math.huge
+
+    for i,v in pairs(Players:GetPlayers()) do
+        if (v.Character and v ~= Client and v.Character:FindFirstChild("HumanoidRootPart")) then
+            if Calamity.Checks.Visible and v.Character:FindFirstChild("Head") then
+                if v.Character.Head.Transparency > 0.5 then
+                    continue
+                end
+            end
+            if Calamity.Checks.Team then
+                if v.Team ~= Client.Team then
+                    continue
+                end
+            end
+            if Calamity.Checks.Crew and Script.Functions.FindCrew(v) and v.DataFolder.Information:FindFirstChild("Crew").Value == Client.DataFolder.Information:FindFirstChild("Crew").Value then
+                continue
+            end
+            local Position, OnScreen = Camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
+            local Distance = (Vector2.new(Position.X, Position.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+
+            if (Distance < Closest and OnScreen) and Script.Functions.RayCastCheck(v.Character.HumanoidRootPart, v.Character) and Script.Functions.FirstPerson(Calamity.AimAssist) and Script.Functions.ThirdPerson(Calamity.AimAssist) and Script.Functions.Grabbed(v.Character) and Script.Functions.ForceField(v.Character) and Script.Functions.Knocked(v.Character) and Script.Functions.Alive(v) then
+                Closest = Distance
+                Target = v
+            end
+        end
+    end
+   
+    return Target
+end)
+
+Script.Drawing.Line = Drawing.new("Line")
+Script.Drawing.Line.Color = Calamity.FOV.Tracer.Color
+Script.Drawing.Line.Transparency = Calamity.FOV.Tracer.Transparency
+Script.Drawing.Line.Thickness = Calamity.FOV.Tracer.Thickness
+Script.Drawing.Line.Visible = Calamity.FOV.Tracer.Visible
+
+Script.Drawing.Circle = Drawing.new("Circle")
+Script.Drawing.AimAssistCircle = Drawing.new("Circle")
+
+Script.Drawing.VisualizerDot = Drawing.new("Circle")
+Script.Drawing.VisualizerDot.Radius = Calamity.FOV.Dot.Size
+Script.Drawing.VisualizerDot.Filled = Calamity.FOV.Dot.Filled
+Script.Drawing.VisualizerDot.Color = Calamity.FOV.Dot.Color
+Script.Drawing.VisualizerDot.Thickness = 1
+Script.Drawing.VisualizerDot.NumSides = Calamity.FOV.Dot.NumSides
+
+Script.Functions.UpdateFOV = LPH_NO_VIRTUALIZE(function()
+    Script.Drawing.Circle.Radius = Calamity.FOV.SilentAim.Size * 3
+    Script.Drawing.Circle.Thickness = Calamity.FOV.SilentAim.Thickness
+    Script.Drawing.Circle.Transparency = Calamity.FOV.SilentAim.Transparency
+    Script.Drawing.Circle.Color = Calamity.FOV.SilentAim.Color
+    Script.Drawing.Circle.Visible = Calamity.FOV.SilentAim.Visible
+    Script.Drawing.Circle.Filled = Calamity.FOV.SilentAim.Filled
+    Script.Drawing.Circle.NumSides = Calamity.FOV.SilentAim.NumSides
+
+    Script.Drawing.AimAssistCircle.Radius = Calamity.FOV.AimAssist.Size * 3
+    Script.Drawing.AimAssistCircle.Thickness = Calamity.FOV.AimAssist.Thickness
+    Script.Drawing.AimAssistCircle.Transparency = Calamity.FOV.AimAssist.Transparency
+    Script.Drawing.AimAssistCircle.Color = Calamity.FOV.AimAssist.Color
+    Script.Drawing.AimAssistCircle.Visible = Calamity.FOV.AimAssist.Visible
+    Script.Drawing.AimAssistCircle.Filled = Calamity.FOV.AimAssist.Filled
+    Script.Drawing.AimAssistCircle.NumSides = Calamity.FOV.AimAssist.NumSides
+
+    
+    if Calamity.FOV.Dynamic.Enabled and Client ~= nil and
+        (Client.Character) and Target and Target.Character then
+        if (Client.Character.HumanoidRootPart.Position - Target.Character.HumanoidRootPart.Position).Magnitude <
+            Calamity.FOV.Dynamic.VeryFarDetection then
+            Calamity.FOV.SilentAim.Size = Calamity.FOV.Dynamic.VeryFarFOV    
+        if (Client.Character.HumanoidRootPart.Position - Target.Character.HumanoidRootPart.Position).Magnitude <
+            Calamity.FOV.Dynamic.FarDetection then
+            Calamity.FOV.SilentAim.Size = Calamity.FOV.Dynamic.FarFOV
+        if (Client.Character.HumanoidRootPart.Position - Target.Character.HumanoidRootPart.Position).Magnitude <
+            Calamity.FOV.Dynamic.MidDetection then
+            Calamity.FOV.SilentAim.Size = Calamity.FOV.Dynamic.MidFOV
+        if (Client.Character.HumanoidRootPart.Position - Target.Character.HumanoidRootPart.Position).Magnitude <
+            Calamity.FOV.Dynamic.CloseDetection then
+            Calamity.FOV.SilentAim.Size = Calamity.FOV.Dynamic.CloseFOV
+        end
+        end
+        end
+        end
+    end
+   
+    if Targetting then
+        if Calamity.SilentAim.Mode == "Target" then
+            Target = AimAssistTarget
+        end
+    else
+        Target = nil
+    end
+    if Calamity.SilentAim.Mode == "FOV" then
+        Target = Script.Functions.GetClosest(Calamity.FOV.SilentAim.Size)
+    end
+    
+   
+   if Target and Calamity.SilentAim.Enabled then
+        local xxx = workspace.CurrentCamera:WorldToViewportPoint(Aimplace)
+		if Calamity.FOV.Tracer.Visible then
+   			Script.Drawing.Line.Visible = true
+        	Script.Drawing.Line.To = Vector2.new(xxx.X, xxx.Y)
+        	Script.Drawing.Line.From = Vector2.new(Mouse.X, Mouse.Y + 36)
+        end
+        if Calamity.FOV.Dot.Visible then
+            Script.Drawing.VisualizerDot.Visible = true
+            Script.Drawing.VisualizerDot.Position = Vector2.new(xxx.X, xxx.Y)
+        end
+        if Calamity.FOV.SilentAim.StickyFOV then
+            Script.Drawing.Circle.Position = Vector2.new(xxx.X, xxx.Y)
+        else
+            Script.Drawing.Circle.Position = Vector2.new(Mouse.X, Mouse.Y + 36) + Vector2.new(Calamity.FOV.SilentAim.Set.X * 10, Calamity.FOV.SilentAim.Set.Y * 10)
+        end
+    else
+        Script.Drawing.Line.Visible = false
+        Script.Drawing.VisualizerDot.Visible = false
+        Script.Drawing.Circle.Position = Vector2.new(Mouse.X, Mouse.Y + 36) + Vector2.new(Calamity.FOV.SilentAim.Set.X * 10, Calamity.FOV.SilentAim.Set.Y * 10)
+        Script.Drawing.AimAssistCircle.Position = Vector2.new(Mouse.X, Mouse.Y + 36) + Vector2.new(Calamity.FOV.AimAssist.Set.X * 10, Calamity.FOV.AimAssist.Set.Y * 10)
+    end
+    if AimAssistTarget and Targetting and Calamity.AimAssist.Enabled then
+        local xxx = workspace.CurrentCamera:WorldToViewportPoint(Aimplace)
+        if Calamity.FOV.AimAssist.StickyFOV then
+            Script.Drawing.AimAssistCircle.Position = Vector2.new(xxx.X, xxx.Y)
+        else
+            Script.Drawing.AimAssistCircle.Position = Vector2.new(Mouse.X, Mouse.Y + 36) + Vector2.new(Calamity.FOV.AimAssist.Set.X * 10, Calamity.FOV.AimAssist.Set.Y * 10)
+        end
+    else
+        Script.Drawing.AimAssistCircle.Position = Vector2.new(Mouse.X, Mouse.Y + 36) + Vector2.new(Calamity.FOV.AimAssist.Set.X * 10, Calamity.FOV.AimAssist.Set.Y * 10)
+    end
+end)
+
+Mouse.KeyDown:Connect(function(Key)
+local Keybind = Calamity.SilentAim.Keybind:lower()
+    if Key == Keybind and Calamity.SilentAim.UseKeybind and Calamity.SilentAim.KeybindType == "Keybind" then
+        Calamity.SilentAim.Enabled = not Calamity.SilentAim.Enabled
+        if Calamity.Preload.Notifications then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+				Title = "Calamity",
+				Text = "Silent Aim: " .. tostring(Calamity.SilentAim.Enabled),
+			    Icon = "rbxassetid://12747441727"
+			})
+        end
+    end
+end)
+
+Mouse.KeyUp:Connect(function(Key)
+local Keybind = Calamity.SilentAim.Keybind:lower()
+    if Key == Keybind and Calamity.SilentAim.UseKeybind and Calamity.SilentAim.KeybindType == "Keybind" and Calamity.SilentAim.HoldMode then
+        Calamity.SilentAim.Enabled = false
+        if Calamity.Preload.Notifications then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+				Title = "Calamity",
+				Text = "Silent Aim: " .. tostring(Calamity.SilentAim.Enabled),
+			    Icon = "rbxassetid://12747441727"
+			})
+        end
+    end
+end)
+
+Uis.InputBegan:connect(function(input)
+    if input.UserInputType == Enum.UserInputType[Calamity.SilentAim.MouseKey] and Calamity.SilentAim.UseKeybind and Calamity.SilentAim.KeybindType == "Mouse" then
+    Calamity.SilentAim.Enabled = not Calamity.SilentAim.Enabled
+        if Calamity.Preload.Notifications then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+				Title = "Calamity",
+				Text = "Silent Aim: " .. tostring(Calamity.SilentAim.Enabled),
+			    Icon = "rbxassetid://12747441727"
+			})
+        end
+    end
+end)
+
+Uis.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType[Calamity.SilentAim.MouseKey] and Calamity.SilentAim.UseKeybind and Calamity.SilentAim.KeybindType == "Mouse" and Calamity.SilentAim.HoldMode then
+		Calamity.SilentAim.Enabled = false
+        if Calamity.Preload.Notifications then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+				Title = "Calamity",
+				Text = "Silent Aim: " .. tostring(Calamity.SilentAim.Enabled),
+			    Icon = "rbxassetid://12747441727"
+			})
+        end
+	end
+end)
+
+Script.Functions.SilentAimHitPart = LPH_NO_VIRTUALIZE(function()
+    local d, p = math.huge, nil
+    if Target then
+        for _,v in pairs(Target.Character:GetChildren()) do
+            if table.find(SilentAimHitParts, v.Name) then
+                local pos = workspace.CurrentCamera:WorldToViewportPoint(v.Position)
+                local Magn = (Vector2.new(Mouse.X, Mouse.Y + 36) - Vector2.new(pos.X, pos.Y)).Magnitude
+                if Magn < d then
+                    d = Magn
+                    p = v
+                end
+            end
+        end
+        return p
+    end
+end)
+
+Script.Functions.AimAssistHitPart = LPH_NO_VIRTUALIZE(function(Player)
+    local d, p = math.huge, nil
+    if Player then
+        for _,v in pairs(Player.Character:GetChildren()) do
+            if table.find(AimAssistHitParts, v.Name) then
+                local pos = workspace.CurrentCamera:WorldToViewportPoint(v.Position)
+                local Magn = (Vector2.new(Mouse.X, Mouse.Y + 36) - Vector2.new(pos.X, pos.Y)).Magnitude
+                if Magn < d then
+                    d = Magn
+                    p = v
+                end
+            end
+        end
+        return p
+    end
+end)
+
+Script.Functions.NearestBodyPart = LPH_NO_VIRTUALIZE(function(character)
+	local ClosestDistance = 1/0
+	local BodyPart = nil
+        
+	if (character and character:GetChildren()) then
+    	for _,  x in next, character:GetChildren() do
+    	if not table.find(IgnoredParts, x.Name) then
+        	if Script.Functions.FilterObjs(x) and Script.Functions.IsOnScreen(x) then
+            local Distance = (Script.Functions.WTS(x) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+            	if (Script.Drawing.Circle.Radius > Distance and Distance < ClosestDistance) then
+                	ClosestDistance = Distance
+                    BodyPart = x
+                end
+			end
+		end
+		end
+	end
+    return BodyPart
+end)
+
+Script.Functions.NearestBodyPart2 = LPH_NO_VIRTUALIZE(function(character)
+	local ClosestDistance = 1/0
+	local BodyPart = nil
+        
+	if (character and character:GetChildren()) then
+    	for _,  x in next, character:GetChildren() do
+    	if not table.find(IgnoredParts2, x.Name) then
+        	if Script.Functions.FilterObjs(x) and Script.Functions.IsOnScreen(x) then
+            local Distance = (Script.Functions.WTS(x) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+            	if (Distance < ClosestDistance) then
+                	ClosestDistance = Distance
+                    BodyPart = x
+                end
+			end
+		end
+		end
+	end
+    return BodyPart
+end)
+
+Script.Functions.NearestPoint = LPH_NO_VIRTUALIZE(function(Part)
+    local mouseray = Mouse.UnitRay
+    mouseray = mouseray.Origin + (mouseray.Direction * (Part.Position - mouseray.Origin).Magnitude)
+    local point = (mouseray.Y >= (Part.Position - Part.Size / 2).Y and mouseray.Y <= (Part.Position + Part.Size / 2).Y) and (Part.Position + Vector3.new(0, -Part.Position.Y + mouseray.Y, 0)) or Part.Position
+    local check = RaycastParams.new()
+    check.FilterType = Enum.RaycastFilterType.Whitelist
+    check.FilterDescendantsInstances = {Part}
+    local ray = game.workspace:Raycast(mouseray, (point - mouseray), check)
+    if ray then
+        return ray.Position
+    else
+        return Mouse.Hit.Position
+    end
+end)
+
+Mouse.KeyDown:Connect(function(Key)
+local Keybind = Calamity.AimAssist.Keybind:lower()
+    if (Key == Keybind) and Calamity.AimAssist.KeybindType == "Keybind" then
+        if Calamity.AimAssist.Enabled then
+            Targetting = not Targetting
+            if Targetting then
+                AimAssistTarget = Script.Functions.GetClosest2(Calamity.FOV.AimAssist.Size)
+                if Calamity.Preload.Notifications and AimAssistTarget then
+                    game:GetService("StarterGui"):SetCore("SendNotification",{
+				        Title = "Calamity",
+				        Text = "Locked Onto: " .. tostring(AimAssistTarget.Name),
+			            Icon = "rbxassetid://12747441727"
+			        })
+                end
+            else
+                if AimAssistTarget ~= nil then
+                    AimAssistTarget = nil
+                    Targetting = false
+                    if Calamity.Preload.Notifications then
+                        game:GetService("StarterGui"):SetCore("SendNotification",{
+				            Title = "Calamity",
+				            Text = "Unlocked",
+			                Icon = "rbxassetid://12747441727"
+			            })
+                    end
+                end
+            end
+        end
+    end
+end)
+
+Mouse.KeyUp:Connect(function(Key)
+local Keybind = Calamity.AimAssist.Keybind:lower()
+    if Key == Keybind and Calamity.AimAssist.KeybindType == "Keybind" and Calamity.AimAssist.HoldMode and AimAssistTarget ~= nil then
+        AimAssistTarget = nil
+        Targetting = false
+        if Calamity.Preload.Notifications then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+				Title = "Calamity",
+				Text = "Unlocked",
+			    Icon = "rbxassetid://12747441727"
+			})
+        end
+    end
+end)
+
+Uis.InputBegan:connect(function(input)
+    if input.UserInputType == Enum.UserInputType[Calamity.AimAssist.MouseKey] and Calamity.AimAssist.KeybindType == "Mouse" then
+    if Calamity.AimAssist.Enabled then
+            Targetting = not Targetting
+            if Targetting then
+                AimAssistTarget = Script.Functions.GetClosest2(Calamity.FOV.AimAssist.Size)
+                if Calamity.Preload.Notifications and AimAssistTarget then
+                    game:GetService("StarterGui"):SetCore("SendNotification",{
+				        Title = "Calamity",
+				        Text = "Locked Onto: " .. tostring(AimAssistTarget.Name),
+			            Icon = "rbxassetid://12747441727"
+			        })
+                end
+            else
+                if AimAssistTarget ~= nil then
+                    AimAssistTarget = nil
+                    Targetting = false
+                    if Calamity.Preload.Notifications then
+                        game:GetService("StarterGui"):SetCore("SendNotification",{
+				            Title = "Calamity",
+				            Text = "Unlocked",
+			                Icon = "rbxassetid://12747441727"
+			            })
+                    end
+                end
+            end
+        end
+    end
+end)
+
+Uis.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType[Calamity.AimAssist.MouseKey] and Calamity.AimAssist.KeybindType == "Mouse" and Calamity.AimAssist.HoldMode then
+		AimAssistTarget = nil
+        Targetting = false
+        if Calamity.Preload.Notifications then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+				Title = "Calamity",
+				Text = "Unlocked",
+			    Icon = "rbxassetid://12747441727"
+			})
+        end
+	end
+end)
+
+RS.Heartbeat:Connect(LPH_JIT_MAX(function()
+    if AimAssistTarget then
+        local pos = nil
+        local cum = nil
+        if Calamity.AimAssist.NearestPart then
+            AimAssistHitPart = tostring(Script.Functions.NearestBodyPart2(AimAssistTarget.Character))
+        else
+            AimAssistHitPart = tostring(Script.Functions.AimAssistHitPart(AimAssistTarget))
+        end
+        if AimAssistTarget.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+            if Calamity.Shake.AirshotShake.Enabled then
+                if Calamity.AimAssist.Predict then
+                    if Calamity.Resolver.Enabled then
+                    if not Script.Functions.AntiLockCheck(AimAssistTarget) then
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + AimAssistTarget.Character[AimAssistHitPart].Velocity * Calamity.AimAssist.Prediction + (Vector3.new(
+                            math.random(-Calamity.Shake.AirshotShake.Value.X, Calamity.Shake.AirshotShake.Value.X),
+                            math.random(-Calamity.Shake.AirshotShake.Value.Y, Calamity.Shake.AirshotShake.Value.Y),
+                            math.random(-Calamity.Shake.AirshotShake.Value.Z, Calamity.Shake.AirshotShake.Value.Z)
+                        ) * 0.1)
+                    else
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + ((AimAssistTarget.Character.Humanoid.MoveDirection * AimAssistTarget.Character.Humanoid.WalkSpeed) * Calamity.AimAssist.Prediction + (Vector3.new(
+                            math.random(-Calamity.Shake.AirshotShake.Value.X, Calamity.Shake.AirshotShake.Value.X),
+                            math.random(-Calamity.Shake.AirshotShake.Value.Y, Calamity.Shake.AirshotShake.Value.Y),
+                            math.random(-Calamity.Shake.AirshotShake.Value.Z, Calamity.Shake.AirshotShake.Value.Z)
+                        ) * 0.1))
+                    end
+                    end
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                else
+                    cum = AimAssistTarget.Character[AimAssistHitPart].Position + (vect3(
+                        math.random(-Calamity.Shake.AirshotShake.Value.X, Calamity.Shake.AirshotShake.Value.X),
+                        math.random(-Calamity.Shake.AirshotShake.Value.Y, Calamity.Shake.AirshotShake.Value.Y),
+                        math.random(-Calamity.Shake.AirshotShake.Value.Z, Calamity.Shake.AirshotShake.Value.Z)
+                    ) * 0.1)
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                end
+            else
+                if Calamity.AimAssist.Predict then
+                    if not Script.Functions.AntiLockCheck(AimAssistTarget) then
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + AimAssistTarget.Character[AimAssistHitPart].Velocity * Calamity.AimAssist.Prediction
+                    else
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + ((AimAssistTarget.Character.Humanoid.MoveDirection * AimAssistTarget.Character.Humanoid.WalkSpeed) * Calamity.AimAssist.Prediction)
+                    end
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                else
+                    cum = AimAssistTarget.Character[AimAssistHitPart].Position
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                end
+            end
+        else
+            if Calamity.Shake.GroundShake.Enabled then
+                if Calamity.AimAssist.Predict then
+                    if Calamity.Resolver.Enabled then
+                    if not Script.Functions.AntiLockCheck(AimAssistTarget) then
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + AimAssistTarget.Character[AimAssistHitPart].Velocity * Calamity.AimAssist.Prediction + (Vector3.new(
+                            math.random(-Calamity.Shake.GroundShake.Value.X, Calamity.Shake.GroundShake.Value.X),
+                            math.random(-Calamity.Shake.GroundShake.Value.Y, Calamity.Shake.GroundShake.Value.Y),
+                            math.random(-Calamity.Shake.GroundShake.Value.Z, Calamity.Shake.GroundShake.Value.Z)
+                        ) * 0.1)
+                    else
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + ((AimAssistTarget.Character.Humanoid.MoveDirection * AimAssistTarget.Character.Humanoid.WalkSpeed) * Calamity.AimAssist.Prediction + (Vector3.new(
+                            math.random(-Calamity.Shake.GroundShake.Value.X, Calamity.Shake.GroundShake.Value.X),
+                            math.random(-Calamity.Shake.GroundShake.Value.Y, Calamity.Shake.GroundShake.Value.Y),
+                            math.random(-Calamity.Shake.GroundShake.Value.Z, Calamity.Shake.GroundShake.Value.Z)
+                        ) * 0.1))
+                    end
+                    end
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                else
+                    cum = AimAssistTarget.Character[AimAssistHitPart].Position + (vect3(
+                        math.random(-Calamity.Shake.GroundShake.Value.X, Calamity.Shake.GroundShake.Value.X),
+                        math.random(-Calamity.Shake.GroundShake.Value.Y, Calamity.Shake.GroundShake.Value.Y),
+                        math.random(-Calamity.Shake.GroundShake.Value.Z, Calamity.Shake.GroundShake.Value.Z)
+                    ) * 0.1)
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                end
+            else
+                if Calamity.AimAssist.Predict then
+                    if not Script.Functions.AntiLockCheck(AimAssistTarget) then
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + AimAssistTarget.Character[AimAssistHitPart].Velocity * Calamity.AimAssist.Prediction
+                    else
+                        cum = AimAssistTarget.Character[AimAssistHitPart].Position + ((AimAssistTarget.Character.Humanoid.MoveDirection * AimAssistTarget.Character.Humanoid.WalkSpeed) * Calamity.AimAssist.Prediction)
+                    end
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                else
+                    cum = AimAssistTarget.Character[AimAssistHitPart].Position
+                    pos = workspace.Camera:WorldToViewportPoint(cum)
+                end
+            end
+        end
+                local main = nil
+                if Calamity.AimAssist.Smoothing then
+                    main = CFrame.new(workspace.Camera.CFrame.p, cum)
+                    workspace.Camera.CFrame = workspace.Camera.CFrame:Lerp(main, Calamity.AimAssist.Smoothness, Enum.EasingStyle[Calamity.AimAssist.Easing.First], Enum.EasingDirection.InOut, Enum.EasingStyle[Calamity.AimAssist.Easing.Second], Enum.EasingDirection.Out)
+                else
+                    workspace.Camera.CFrame = CFrame.new(workspace.Camera.CFrame.p, cum)
+                end
+                if AimAssistTarget.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+                if Calamity.AimAssist.AirshotSmoothing then
+                    workspace.Camera.CFrame = workspace.Camera.CFrame:Lerp(main, Calamity.AimAssist.AirshotSmoothness, Enum.EasingStyle[Calamity.AimAssist.Easing.First], Enum.EasingDirection.InOut, Enum.EasingStyle[Calamity.AimAssist.Easing.Second], Enum.EasingDirection.Out)
+                else
+                    workspace.Camera.CFrame = CFrame.new(workspace.Camera.CFrame.p, cum)
+                end
+            end
+    end
+end))
+    
+RS.Heartbeat:Connect(LPH_JIT_MAX(function()
+	if Target then
+		if Target ~= nil and Calamity.SilentAim.NearestPart and Calamity.SilentAim.NearestPartType == "Closest Part" and Calamity.SilentAim.Predict then
+			Calamity.SilentAim.HitParts = tostring(Script.Functions.NearestBodyPart(Target.Character))
+			if Calamity.Resolver.Enabled and Target then
+            if not Script.Functions.AntiLockCheck(Target) then
+                Aimplace = Target.Character[Calamity.SilentAim.HitParts].Position + Vector3.new(Target.Character[Calamity.SilentAim.HitParts].Velocity.X, Target.Character[Calamity.SilentAim.HitParts].Velocity.Y * 0.6, Target.Character[Calamity.SilentAim.HitParts].Velocity.Z) * Calamity.SilentAim.Prediction
+            else
+                Aimplace = Target.Character[Calamity.SilentAim.HitParts].Position + ((Target.Character.Humanoid.MoveDirection * Target.Character.Humanoid.WalkSpeed) * Calamity.SilentAim.Prediction)
+            end
+            end
+            if Calamity.SilentAim.Humanize then
+                local HumanizeValue = Calamity.SilentAim.HumanizeAmount
+                Aimplace = (Aimplace + Script.Functions.RandomVec(HumanizeValue, 0.01))
+            end
+        elseif Target ~= nil and Calamity.SilentAim.NearestPart and Calamity.SilentAim.NearestPartType == "Closest Point" and Calamity.SilentAim.Predict then
+        	Calamity.SilentAim.HitParts = tostring(Script.Functions.NearestBodyPart(Target.Character))
+            if Calamity.Resolver.Enabled and Target then
+                Aimplace = (Script.Functions.NearestPoint(Target.Character[Calamity.SilentAim.HitParts]) + Target.Character[Calamity.SilentAim.HitParts].Velocity * Calamity.SilentAim.Prediction)
+            end
+            if Calamity.SilentAim.Humanize then
+                local HumanizeValue = Calamity.SilentAim.HumanizeAmount
+                Aimplace = (Aimplace + Script.Functions.RandomVec(HumanizeValue, 0.01))
+            end
+        elseif Target ~= nil and Calamity.SilentAim.NearestPart == false and Calamity.SilentAim.Predict then
+        	Calamity.SilentAim.HitParts = tostring(Script.Functions.SilentAimHitPart())
+            if Calamity.Resolver.Enabled and Target then
+            if not Script.Functions.AntiLockCheck(Target) then
+                Aimplace = Target.Character[Calamity.SilentAim.HitParts].Position + Target.Character[Calamity.SilentAim.HitParts].Velocity * Calamity.SilentAim.Prediction
+            else
+                Aimplace = Target.Character[Calamity.SilentAim.HitParts].Position + ((Target.Character.Humanoid.MoveDirection * Target.Character.Humanoid.WalkSpeed) * Calamity.SilentAim.Prediction)
+            end
+            end
+         RS.Heartbeat:Connect(LPH_JIT_MAX(function()
+    if Target and Calamity.SilentAim.Enabled and Calamity.SilentAim.Predict then
+        local groundOffset = 2
+        Aimplace = Aimplace + Vector3.new(0, groundOffset, 0)
+    end
+end))
+            if Calamity.SilentAim.Humanize then
+                local HumanizeValue = Calamity.SilentAim.HumanizeAmount
+                Aimplace = (Aimplace + Script.Functions.RandomVec(HumanizeValue, 0.01))
+            end
+        end
+    end
+end))
+
+RS.Heartbeat:Connect(LPH_NO_VIRTUALIZE(function()
+    Script.Functions.SilentMisc()
+end))
+
+RS.RenderStepped:Connect(LPH_NO_VIRTUALIZE(function()
+	Script.Functions.UpdateFOV()
+end))
+
+local rawmetatable = getrawmetatable(game)
+local old = rawmetatable.__namecall
+setreadonly(rawmetatable, false)
+rawmetatable.__namecall = newcclosure(LPH_NO_VIRTUALIZE(function(...)
+	local args = {...}
+		if Target and Calamity.SilentAim.Enabled and getnamecallmethod() == "FireServer" and args[2] == mousepos() then
+			args[3] = Aimplace
+			return old(unpack(args))
+		end
+	return old(...)
+end))
+
+for _, Player in ipairs(Players:GetPlayers()) do
+    if (Player ~= Client and Client:IsFriendsWith(Player.UserId)) then
+        table.insert(Script.Friends, Player)
+    end
+end
+
+Players.PlayerAdded:Connect(function(Player)
+    if (Client:IsFriendsWith(Player.UserId)) then
+        table.insert(Script.Friends, Player)
+    end
+end)
+
+Players.PlayerRemoving:Connect(function(Player)
+    local i = table.find(Script.Friends, Player)
+    if (i) then
+        table.remove(Script.Friends, i)
+    end
+end)
+
+end)()
