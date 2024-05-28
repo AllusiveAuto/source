@@ -1,0 +1,476 @@
+
+███████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░░░███░░░░░░██░░░░░░█░░░░░░░░░░░░░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█
+█░░▄▀░░█████████████░░▄▀░░███████░░▄▀░░███░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀░░░░░░░░░░█████░░▄▀░░███████░░▄▀░░███░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░███████░░▄▀░░███░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░███████░░▄▀░░███░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░█░░░░░░░░░░▄▀░░█
+█████████░░▄▀░░█████░░▄▀░░███████░░▄▀░░███░░▄▀░░██░░▄▀░░█████░░▄▀░░██░░▄▀░░█████████░░▄▀░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░░░▄▀░░░░█░░▄▀░░██░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░█░░░░░░░░░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░░░░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████
+                                     UPDATE LOG
+
+-------------------------------------------------------------------------------------------
+-- // Added Solara Support
+-- // Fixed Extra Errors
+-- // Added Username Changer
+-- // Added More Universal Support
+-- // Fixed Universal Support
+
+getgenv().Stirus = { 
+	LoadConfig = { -- // LoadConfig Settings
+		['ScriptKey'] = "Key", -- // Put Your Luaarmor Key Here
+        ['Version'] = "Latest", -- // "Latest", Latest Version // "Solara" Another Version Released // Must Have The Right Table For Them To Work
+        ['Notifications'] = false, -- // Enables Notifications When You Enable Things
+        ['Intro'] = false, -- // Enables A Small Intro
+        ['ExecutionTime'] = {['Enabled'] = true, ['Method'] = "Notification"}, -- // Notifys You With How Long It Took To Execute // "Notification" Sends A Notification Of Execution Time // "Print" Prints Execution Time
+        ['UsernameChanger'] = {['Enabled'] = true, ['Username'] = ".gg/stirus", ['DisplayName'] = "STIRUS"}, -- // Spoofs Your Roblox Username // Useful For Going Blatant In Clips // Local Player Only
+	},
+	Universal = { --// Universal Settings // Disable If On A Dahood Game
+        SilentAim = { -- // Universal Silent Aim Settings
+            ['Enabled'] = false, -- // Enables Universal Silent Aim
+            ['UseKeybind'] = false, -- // Uses Keybind To Enable And Disable Universal Silent Aim
+        	['KeybindType'] = "Keybind", -- // "Keybind" Uses The Keybind You Selected To Toggle Universal Silent Aim // "Mouse" Uses The Mouse Keybind You Selected To Toggle Universal Silent Aim
+        	['Keybind'] = "E", -- // Universal Silent Aim Keybind To Enable And Disable It // Must Have KeybindType On "Keybind"
+        	['MouseKey'] = "MouseButton3", -- // Any Mouse Key // All Keybinds Here ( https://create.roblox.com/docs/reference/engine/enums/UserInputType ) // Must Have KeybindType On "Mouse"
+        	['HoldMode'] = true, -- // Makes So You Have To Hold The Keybind
+            ['ThirdPerson'] = true, -- // Universal Silent Aim Works In Third Person
+            ['FirstPerson'] = true, -- // Universal Silent Aim Works In First Person
+            ['UseHitChance'] = true, -- // Uses Hit Chance
+        	['HitChance'] = 100, -- // Chance The Universal Silent Aim Will Hit
+            ['Predict'] = false, -- // Predict The Player
+            ['Prediction'] = 0.065, -- // Universal Silent Aim Prediction Amount
+            ['HitPart'] = "Head", -- // Universal Silent Aim HitPart
+            ['RandomPart'] = false, -- // Randomizes Silent Aim HitPart
+        },
+        AimAssist = { -- // Universal Aim Assist Settings
+            ['Enabled'] = false, -- // Enables Universal Aim Assist
+            ['UseKeybind'] = false, -- // Uses Keybind To Enable And Disable Universal Aim Assist
+        	['KeybindType'] = "Keybind", -- // "Keybind" Uses The Keybind You Selected To Toggle Universal Aim Assist // "Mouse" Uses The Mouse Keybind You Selected To Toggle Universal Aim Assist
+        	['Keybind'] = "E", -- // Universal Aim Assist Keybind To Enable And Disable It // Must Have KeybindType On "Keybind"
+        	['MouseKey'] = "MouseButton3", -- // Any Mouse Key // All Keybinds Here ( https://create.roblox.com/docs/reference/engine/enums/UserInputType ) // Must Have KeybindType On "Mouse"
+        	['HoldMode'] = true, -- // Makes So You Have To Hold The Keybind
+            ['ThirdPerson'] = true, -- // Universal Aim Assist Works In Third Person
+            ['FirstPerson'] = true, -- // Universal Aim Assist Works In First Person
+            ['Predict'] = false, -- // Predict The Player
+            ['Prediction'] = 0.065, -- // Universal Aim Assist Prediction Amount
+            ['Smoothing'] = true, -- // Enables Smoothing For Universal Aim Assist
+            ['Smoothness'] = 0.02, -- // Universal Aim Assist Smoothness
+            ['HitPart'] = "Head", -- // Universal Aim Assist HitPart
+            ['RandomPart'] = false, -- // Randomizes Aim Assist HitPart
+        },
+    },
+	SilentAim = { -- // Silent Aim To Help Hit Your Shots
+        ['Enabled'] = true, -- // Enables Silent Aim
+        ['BlatantMode'] = false, -- // Makes Silent Aim More Blatant // Not Recommended
+        ['Mode'] = "FOV", -- // "FOV" Silent Aim Works On Whoever Is In FOV // "Target" Silent Aim Only Works On Aim Assist Target
+        ['UseKeybind'] = true, -- // Uses Keybind To Enable And Disable Silent Aim
+        ['KeybindType'] = "Keybind", -- // "Keybind" Uses The Keybind You Selected To Toggle Silent Aim // "Mouse" Uses The Mouse Keybind You Selected To Toggle Silent Aim
+        ['Keybind'] = "[", -- // Silent Aim Keybind To Enable And Disable It // Must Have KeybindType On "Keybind"
+        ['MouseKey'] = "MouseButton3", -- // Any Mouse Key // All Keybinds Here ( https://create.roblox.com/docs/reference/engine/enums/UserInputType ) // Must Have KeybindType On "Mouse"
+        ['HoldMode'] = false, -- // Makes So You Have To Hold The Keybind
+        ['ThirdPerson'] = true, -- // Silent Aim Works In Third Person
+        ['FirstPerson'] = true, -- // Silent Aim Works In First Person
+        ['Predict'] = true, -- // Predict The Player
+        ['Prediction'] = 0.135, -- // Silent Aim Prediction
+        ['HitChance'] = 100, -- // Chance The Silent Aim Will Hit
+        ['Humanize'] = false, -- // Makes Silent Aim More Legit
+        ['HumanizeAmount'] = 3.1, -- // Humanize Amount
+        ['HitParts'] = {"HumanoidRootPart", "Head"}, -- // Table Of The Parts You Want To Use // If NearestPart Is Enabled This Wont Work
+        ['NearestPart'] = true, -- // Enables NearestPartType
+	    ['NearestPartType'] = "Closest Point", -- // "Closest Point" Silent Aim HitPart Will Be Closest Point On Player Body // "Closest Part" Silent Aim HitPart Will Be Closest Part On Player Body // "Random" Chooses Random Part On Player Body
+        ['AirshotFunction'] = true, -- // When Player Is In Air It Will Use The Part Below
+	    ['AirshotPart'] = "Head", -- // Airshot Function Part
+	    ['IgnoreParts'] = false, -- // Parts That Silent Aim Wont Lock Onto
+        ['IgnoredParts'] = {"LeftHand", "RightHand"}, -- // Table Of Parts
+    },
+    AimAssist = { -- // Aim Assist To Help You Trace A Player
+        ['Enabled'] = true, -- // Enables Aim Assist
+        ['SafeMode'] = {['Enabled'] = true, ['TypingCheck'] = true, ['ReloadingCheck'] = true, ['WeaponCheck'] = true}, -- // Unlocks When Player Is Typing, Reloading, Or Doesnt Have Gun Equiped
+        ['KeybindType'] = "Keybind", -- // "Keybind" Uses The Keybind You Selected To Toggle Aim Assist // "Mouse" Uses The Mouse Keybind You Selected To ToggleAim Assist
+        ['Keybind'] = "C", -- // Aim Assist Keybind To Enable And Disable It // Must Have KeybindType On "Keybind"
+        ['MouseKey'] = "MouseButton3", -- // Any Mouse Key // All Keybinds Here ( https://create.roblox.com/docs/reference/engine/enums/UserInputType ) // Must Have KeybindType On "Mouse"
+        ['HoldMode'] = false, -- // Makes So You Have To Hold The Keybind
+        ['ThirdPerson'] = true, -- // Aim Assist Works In Third Person
+        ['FirstPerson'] = true, -- // Aim Assist Works In First Person
+        ['HitParts'] = {"Head", "UpperTorso", "HumanoidRootPart"}, -- // Table Of The Parts You Want To Use // If NearestPart Is Enabled This Wont Work
+        ['NearestPart'] = true, -- // Uses Whatever HitPart Is Closest To Mouse
+        ['Predict'] = true, -- // Predict The Player
+        ['Prediction'] = 0.13, -- // Prediction Amount
+        ['AirshotFunction'] = true, -- // When Player Is In Air It Will Use The Part Below
+        ['AirshotPart'] = "Head", -- // Airshot Function Part
+        ['Smoothing'] = true, -- // Enables Smoothing For Aim Assist
+        ['Smoothness'] = 0.0208165, -- // Aim Assist Smoothness
+        ['AirshotSmoothing'] = true, -- // Smoothness When Player Is In Air
+        ['AirshotSmoothness'] = 0.02465, -- // Airshot Smoothness
+        ['DisableOutSideOfFOV'] = false, -- // Disables Aim Assist When Player Is Outside FOV
+	    ['DisableWhenYourKnocked'] = true, -- // Disables When Local Player Is Knocked
+	    ['IgnoreParts'] = false, -- // Parts That Aim Assist Wont Lock Onto
+        ['IgnoredParts'] = {"RightFoot", "LeftFoot"}, -- // Table Of Parts
+	    ['Easing'] = { -- // Current Easing Methods ( Linear, Sine, Back, Quad, Quart, Quint, Bounce, Elastic, Exponential, Circular, Cubic )
+	        ['First'] = "Sine", -- // First Easing Style Method
+	        ['Second'] = "Circular", -- // Second Easing Style Method
+	    },
+    },
+    Shake = { -- // Aim Assist Shake
+        GroundShake = { -- / Ground Shake Settings
+            ['Enabled'] = true, -- // Enable Ground Shake
+            ['Value'] = { -- // Ground Shake Values
+                ['X']= 5, -- // Ground Shake X Value
+		        ['Y'] = 5, -- // Ground Shake Y Value
+	            ['Z'] = 5, -- // Ground Shake Z Value 
+            },
+        },
+        AirshotShake = { -- // Airshot Shake Settings
+            ['Enabled'] = true, -- // Enable Airshot Shake
+            ['Value'] = { -- // Airshot Shake Values
+                ['X']= 5, -- // Airshot Shake X Value
+		        ['Y'] = 3, -- // Airshot Shake Y Value
+	            ['Z'] = 1, -- // Airshot Shake Z Value 
+            },
+        },
+    },
+    Checks = { -- // Global Checks
+	    ['Grabbed'] = true, -- // Checks If Player Is Grabbed	
+        ['Crew'] = false,  -- // Checks If Player Is In Your Crew
+	    ['Friend'] = true, -- // Checks If Player Is On Your Friends List
+	    ['Visible'] = true, -- // Checks If Player Is Visible
+	    ['ForceField'] = false, -- // Checks If Player Has A ForceField
+        ['Wall'] = true, -- // Checks If Player Is Behind A Wall
+        ['Alive'] = true, -- // Checks If Player Is Alive
+        ['Knocked'] = true, -- // Checks If Player is Knocked
+        ['Team'] = false, -- // Checks If Player Is On Same Team As You
+    },
+    FOV = {
+        SilentAim = { -- // Silent Aim FOV
+            ['Visible'] = true, -- // Makes Silent Aim FOV Visible
+            ['Size'] = 20, -- // Silent Aim FOV Size
+            ['NumSides'] = 1000, -- // Silent Aim FOV Num Sides
+	        ['Transparency'] = 0.25, -- // Silent Aim FOV Transparency
+	        ['Filled'] = false, -- // Makes Silent Aim FOV Filled
+            ['Thickness'] = 1, -- // Silent Aim FOV Thickness
+            ['Set'] = {['X'] = 0, ['Y'] = 0}, -- // FOV Offset // Put To 0 For Normal Position
+	        ['Color'] = Color3.fromRGB(0, 255, 0), -- // Silent Aim FOV Color
+	        ['StickyFOV'] = false, -- // Silent FOV Sticks To Target
+        },
+        AimAssist = { -- // Aim Assist FOV
+            ['Visible'] = false, -- // Makes Aim Assist FOV Visible
+            ['Size'] = 60, -- // Aim Assist FOV Size
+            ['NumSides'] = 1000, -- // Aim Assist FOV Num Sides
+            ['Transparency'] = 1, -- // Aim Assist FOV Transparency
+	        ['Filled'] = false, -- // Makes Aim Assist FOV Filled
+            ['Thickness'] = 1, -- // Aim Assist FOV Thickness
+            ['Set'] = {['X'] = 0, ['Y'] = 0}, -- // FOV Offset // Put To 0 For Normal Position
+	        ['Color'] = Color3.fromRGB(255, 255, 255), -- // Aim Assist FOV Color
+            ['StickyFOV'] = false, -- // Silent FOV Sticks To Target
+        },
+        Tracer = { -- // Tracer Settings
+            ['Visible'] = true, -- // Makes Tracer Visible
+            ['Thickness'] = 2, -- // Tracer Thickness
+            ['Transparency'] = 1, -- // Tracer Transparency
+            ['Color'] = Color3.fromRGB(255, 255, 255), -- // Tracer Color
+        },
+        Dot = { -- // Visualizer Dot Settings
+        	['Visible'] = true, -- // Makes Visualizer Dot Visible
+        	['Size'] = 3, -- // Visualizer Dot Size
+        	['NumSides'] = 1000, -- // Visualizer Dot Num Sides
+            ['Transparency'] = 0.5, -- // Visualizer Dot Transparency
+	        ['Filled'] = true, -- // Makes Visualizer Dot Filled
+            ['Color'] = Color3.fromRGB(255, 255, 255), -- // Visualizer Dot Color
+        },
+        Dynamic = { -- // Changes FOV Size Based On Distance Away From Target
+            ['Enabled'] = false, -- // Enables Dynamic FOV
+            ['CloseDetection'] = 10, -- // In Studs
+            ['MidDetection'] = 20, -- // In Studs
+            ['FarDetection'] = 30, -- // In Studs
+            ['VeryFarDetection'] = math.huge, -- // Keep At math.huge
+            ['CloseFOV'] = 15, -- // Close FOV
+            ['MidFOV'] = 12, -- // Mid FOV
+            ['FarFOV'] = 10, -- // Far FOV
+            ['VeryFarFOV'] = 8, -- // Very Far FOV
+        },
+    },
+    Resolver = { -- // Resolver Settings // Anti Aim Viewer Settings
+      ['Enabled'] = true, -- // Enables The Resolver // Will Automatically Turn On When It Detects The Player Using Anti Lock
+      ['AntiAimViewer'] = false, -- // Enables Anti Aim Viewer
+    },
+    Misc = { -- // Miscellaneous Settings
+        Emotes = { -- // Animation Pack Emotes ( You Need The Gamepasses )
+        	['AutoEquipItem'] = true, -- // Automatically Equips Wallet After Doing Emote ( For Greet And Lay )
+            ['UnequipAfter'] = true, -- // Unequips The Tool After Equipping
+            ['Item'] = "Wallet", -- // Item That It Will Equip
+            ['Lay'] = true, ['LayKeybind'] = "Z", -- // Does Lay Animation When You Click The Keybind
+            ['Greet'] = true, ['GreetKeybind'] = "G", -- // Does Greet Animation When You Click The Keybind
+            ['Sturdy'] = true, ['SturdyKeybind'] = "B", -- // Does Sturdy Animation When You Click The Keybind
+            ['Griddy'] = true, ['GriddyKeybind'] = "N", -- // Does Griddy Animation When You Click The Keybind
+            ['Speed'] = true, ['SpeedKeybind'] = "T", -- // Does Speed Blitz Animation When You Click The Keybind
+            ['Default'] = true, ['DefaultKeybind'] = "P", -- // Does The Default Animation When You Click The Keybind
+        },
+        Auto360 = { -- // Spins Camera In A 360 Automatically
+            ['Enabled'] = false, -- // Enables Auto360
+            ['Keybind'] = "Q", -- // Keybind To Spin Camera
+            ['SpinSpeed'] = 3.7, -- // How Fast It Spins
+        },
+        CloseGame = { -- // Leaves Game You Are In
+            ['Enabled'] = true, -- // Enables Close Game
+            ['Mode'] = "Message", -- // "Key" When You Press The Key It Will Make You Leave // "Message" When You Type The Message Below It Will Make You Leave
+            ['Message'] = "I hate this game!", -- // When You Type This It Will Make You Leave // Must Have Mode On "Message"
+            ['Keybind'] = "T", -- // When You Click This Key It Will Make You Leave // Must Have Mode On "Key"
+            ['JumpBeforeLeaving'] = true, -- // Makes You Jump Before Leaving // Most Realistic Looking
+            ['UseDelay'] = true, -- // Adds A Delay Before You Leave
+            ['Delay'] = 2, -- // Delay Amount
+            ['CloseOnHealth'] = {['Enabled'] = false, ['Health'] = 20}, -- // Leaves The Game When Humanoids Health Is Equal To Or Lower Than The Health Chosen
+        },
+        Rejoin = { -- // Makes You Rejoin The Server You Are In
+            ['Enabled'] = true, -- // Enables Rejoin
+            ['Mode'] = "Message", -- // "Key" When You Press The Key It Will Make You Rejoin // "Message" When You Type The Message Below It Will Make You Rejoin
+            ['Type'] = "Same", -- // "Same" Rejoins Same Server // "Game" Rejoins Different Server
+            ['Message'] = "Im gay", -- // When You Type This It Will Make You Rejoin // Must Have Mode On "Message"
+            ['Keybind'] = "M", -- // Keybind To Rejoin
+            ['JumpBeforeRejoining'] = true, -- // Makes You Jump Before Rejoining // Most Realistic Looking
+            ['RejoinOnHealth'] = {['Enabled'] = false, ['Health'] = 15}, -- // Rejoins The Game When Humanoids Health Is Equal To Or Lower Than The Health Chosen
+        },
+        AutoReset = { -- // Automatically Resets // Bypasses The Health Has To Be Full Thing
+            ['Enabled'] = true, -- // Enables Auto Reset
+            ['Mode'] = "Message", -- // "Key" When You Press The Key It Will Make You Reset // "Message" When You Type The Message Below It Will Make You Reset
+            ['Message'] = "123", -- // When You Type This It Will Make You Reset // Must Have Mode On "Message"
+            ['Keybind'] = "L", -- // Keybind To Reset
+            ['JumpBeforeResetting'] = true, -- // Makes You Jump Before Resetting // Most Realistic Looking
+            ['UseDelay'] = true, -- // Adds A Delay Before Resetting
+            ['Delay'] = 2, -- // Delay Amount
+            ['ResetOnHealth'] = {['Enabled'] = false, ['Health'] = 10}, -- // Resets When Humanoids Health Is Equal To Or Lower Than The Health Chosen
+        },
+        AutoHeal = { -- // Automatically Heals For You // Must Have Food In Inventory
+            ['Enabled'] = true, -- // Enables Auto Heal
+            ['UseKeybind'] = true, -- // Uses Keybind
+            ['Keybind'] = "L", -- // Keybind To Auto Heal
+            ['Health'] = 5, -- // Health When It Starts Auto Healing
+            ['UseDelay'] = false, -- // Adds A Delay Before Healing
+            ['Delay'] = 2, -- // Delay Amount
+        },
+        Macro = { -- // Built In Macro
+            ['Enabled'] = true, -- // Enables Macro
+            ['BypassMacroAbuse'] = true, -- // Bypasses Macro Abuse
+            ['HoldMode'] = false, -- // You Have To Hold The Keybind Instead Of Clicking It To Enable The Macro
+            ['AutoCrouch'] = true, -- // Automatically Holds Crouch For You
+            ['Keybind'] = "X", -- // Macro Keybind
+            ['Mode'] = "First Person", -- // "Third Person" Macros In Third Person // "First Person" Macros In First Person
+        },
+        Noclip = { -- // Built In Noclip Macro // Used To Go Through Walls
+            ['Enabled'] = true, -- // Enables Noclip Macro
+            ['Keybind'] = "N", -- // Noclip Macro Keybind
+            ['HoldMode'] = true, -- // You Have To Hold The Keybind Instead Of Clicking It To Enable The Noclip Macro
+            ['Delay'] = 0.01, -- // Delay Amount // Anything Below 0.1 Will Kick You If You Hold It For A Long Time
+            ['Guns'] = {['First'] = "[Shotgun]", ['Second'] = "[TacticalShotgun]"}, -- // Noclip Macro Guns To Use
+        },
+        MemorySpoofer = { -- // Memory Spoofer Settings // Spoofs Memory So You Cant Get Called Out For Exploiting
+			['Enabled'] = false, -- // Enables Memory Spoofer
+			['DifferentAverage'] = true, -- // Makes The Average Memory Different From The Current One // More Legit
+			['UseTarget'] = false, -- // Changes The Target
+			['Speed'] = 1, -- // Speed In Which It Changes // 1 Is Default // Lower = Faster // Higher = Slower
+			['Start'] = 821, -- // Starting Number 
+        	['End'] = 912, -- // Ending Number
+        	['SecondStarting'] = 11, -- // Second Starting Number ( After The "." )
+        	['SecondEnding'] = 99, -- // Second Starting Number ( After The "." )
+        	['AverageDifference'] = 23, -- // The Difference Between Current Memory And Average
+        	['Target'] = 300, -- // Target Amount
+        	['TargetSecond'] = 00, -- // Target Second Amount ( After The "." )
+		},
+        F9Cleaner = { -- // Cleans F9 Console
+            ['Enabled'] = true, -- // Enables F9 Cleaner
+            ['Keybind'] = "N", -- // F9 Cleaner Keybind
+            ['UseDelay'] = false, -- // Use Delay
+            ['Delay'] = 0.1, -- // Delay Amount
+        },
+        FPSUnlocker = { -- // FPS Unlocker ( If You Dont Have One )
+            ['Enabled'] = true, -- // Enables FPS Unlocker
+            ['Booster'] = true, -- // Boosts FPS
+            ['FPS'] = 360, -- // Amount Of FPS
+        },
+        Settings = { -- // Other Settings
+            ['AutoLowGFX'] = true, -- // Automatically Enables Low GFX
+            ['MuteBoombox'] = true, -- // Automatically Mutes All Boomboxes
+            ['AutoReload'] = false, -- // Automatically Reloads When Gun Has 0 Bullets
+            ['RemoveSeats'] = true, -- // Automatically Removes Every Seat
+        },
+    },
+    TriggerBot = { -- // TriggerBot Settings
+        ['Enabled'] = false, -- // Enable TriggerBot
+        ['Visualizer'] = true, -- // Puts Dot On Cursor To Tell You When You Are Targetting Someone And When TriggerBot Is Enabled
+        ['EnabledColor'] = Color3.fromRGB(0, 255, 0), -- // TriggerBot Visualizer Enabled Color
+        ['DisabledColor'] = Color3.fromRGB(255, 0, 0), -- // TriggerBot Visualizer Disabled Color
+        ['Keybind'] = "T", -- // TriggerBot Keybind
+        ['UseDelay'] = false, -- // Use Delay
+        ['Delay'] = 0.3, -- // Delay Amount
+    },
+    Safety = { -- // Safety Options
+        ['NoGroundShots'] = true, -- // Silent Aim Doesnt Shoot Ground
+        ['AntiCurve'] = true, -- // Silent Aim Doesnt Curve
+        ['PanicBind'] = {['Enabled'] = true, ['Type'] = "Key", ['Message'] = "I love men", ['Keybind'] = "B"}, -- // Turns Everything Off // "Key" Uses Keybind For Panic Bind // "Message" Uses Message For Panic Bind
+    	['HideVisuals'] = {['Enabled'] = true, ['Type'] = "Key", ['Message'] = "no more esp", ['Keybind'] = "E", ['FadeOut'] = true}, -- // Hides All The Visuals // "Key" Uses Keybind For Hiding Visuals // "Message" Uses Message For Hiding Visuals
+    	['KickIfModJoins'] = true, -- // Automatically Kicks You When A Dahood Mod Joins The Game
+    },
+    FrameSkip = { -- // Frame Skip Settings
+        ['Enabled'] = true, -- // Enables Frame Skip
+        ['Type'] = "Jump", -- // "Jump" Frame Skips When Target Jumps // "Key" Frame Skips When You Click A Keybind
+        ['HoldMode'] = true, -- // You Have To Hold The Keybind Instead Of Clicking It To Enable FrameSkip
+        ['Keybind'] = "V", -- // Keybind Of Frame Skip // Must Have "Key" On
+        ['Strength'] = 0.5, -- // The Strength Of The Frame Skip
+    },
+    GunSettings = { -- // Automatically Changes Settings Based On Gun Equipped
+        ['Enabled'] = true, -- // Enables Gun Settings 
+        ['UseFOV'] = true, -- // Uses FOV Settings
+        ['UsePrediction'] = true, -- // Uses Prediction Settings
+        ['UseHitChance'] = true, -- // Uses Hit Chance Settings
+        ['UseSmoothnes'] = true, -- // Uses Smoothness Settings
+        ['UseDefault'] = false, -- // Use Default Settings
+        ['UseAirshot'] = true, -- // Use Airshot Settings
+        ['UseRange'] = true, -- // Use Range Settings
+        ['CloseDetection'] = 10, -- // Close Detection ( In Studs )
+        ['MidDetection'] = 30, -- // Mid Detection ( In Studs )
+        ['FarDetection'] = 50, -- // Far Detection ( In Studs )
+        ['VeryFarDetection'] = math.huge, -- // Very Far Detection ( In Studs ) // math.huge Recommended 
+        ['Double-Barrel SG'] = { -- // Double Barrel SG Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 15, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 10, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 7, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['Revolver'] = { -- // Revolver Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 11, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 9, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 7, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['SMG'] = { -- // SMG Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 12.5, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 12.5, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 12.5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['Shotgun'] = { -- // Shotgun Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 12.5, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 12.5, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 12.5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['TacticalShotgun'] = {-- // Tactical Shotgun Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 13, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 10, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 8, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 7, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['P90'] = {-- // P90 Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 12.5, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 12.5, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 12.5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['Silencer'] = {-- // Silencer Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 12.5, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 12.5, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 12.5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['AR'] = {-- // AR Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 12.5, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 12.5, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 12.5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+        ['AK47'] = {-- // AK47 Settings
+            ['FOV'] = 25, ['Prediction'] = 0.135, ['HitChance'] = 100, ['Smoothness'] = 0.02, -- // Default Settings // Must Have "UseDefault" On
+            ['AirshotFOV'] = 10, ['AirshotPrediction'] = 0.135, ['AirshotSmoothness'] = 0.025, -- // Airshot Settings // Must Have "UseAirshot" On
+            ['CloseFOV'] = 15, ['ClosePrediction'] = 0.135, ['CloseHitChance'] = 100, ['CloseSmoothness'] = 0.02, -- // Close Settings // Must Have "UseHitChance" On
+            ['MidFOV'] = 12.5, ['MidPrediction'] = 0.135, ['MidHitChance'] = 100, ['MidSmoothness'] = 0.02, -- // Mid Settings // Must Have "UseRange" On
+            ['FarFOV'] = 12.5, ['FarPrediction'] = 0.135, ['FarHitChance'] = 100, ['FarSmoothness'] = 0.02, -- // Far Settings // Must Have "UseRange" On
+            ['VeryFarFOV'] = 12.5, ['VeryFarPrediction'] = 0.135, ['VeryFarHitChance'] = 100, ['VeryFarSmoothness'] = 0.02, -- // Very Far Settings // Must Have "UseRange" On
+        },
+    },
+    ESP = { -- // ESP Settings ( May Cause FPS Drops )
+        ['Enabled'] = true, -- // Enables ESP
+        ['UseKeybind'] = true, -- // Use ESP Keybind
+        ['HoldMode'] = false, -- // Must Hold Keybind Down
+        ['Keybind'] = "H", -- // ESP Keybind ( Must Have UseKeybind On )
+        ['TeamCheck'] = false, -- // ESP Team Check ( Dont Use On Dahood Games )
+		['TeamColors'] = false, -- // ESP Team Colors ( Changes Colors Based On Team )
+		['LocalPlayer'] = true, -- // Makes ESP Visible On Local Player ( You )
+		['VisibleOnly'] = true, -- // ESP Only Works On Visible Players
+		['RainbowMode'] = false, -- // Makes Main ESP Features Color A Rainbow
+        ['Box'] = {['Enabled'] = true, ['Color'] = Color3.fromRGB(0, 255, 0), ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0), ['Filled'] = true, ['FilledColor'] = Color3.fromRGB(0, 255, 0), ['FillTransparency'] = 0.15}, -- // Box Settings
+        ['HealthBar'] = {['Enabled'] = true, ['HealthText'] = true, ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0),  ['Font'] = "UI", ['Size'] = 13}, -- // Health Bar Settings
+        ['ArmorText'] = {['Enabled'] = false, ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0),  ['Font'] = "UI", ['Size'] = 13}, -- // Armor Bar Settings
+        ['Names'] = {['Enabled'] = true, ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0),  ['Color'] = Color3.fromRGB(255, 255, 255), ['Font'] = "UI", ['Size'] = 13, ['UseDisplayNames'] = true}, -- // Names Settings
+        ['Distance'] = {['Enabled'] = true, ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0),  ['Color'] = Color3.fromRGB(255, 255, 255), ['Font'] = "UI", ['Size'] = 13, ['Method'] = "Studs", ['Shortened'] = true}, -- // Distance Settings // "Studs", "Meters", "Yards", "Inches", "Miles"
+        ['Tools'] = {['Enabled'] = true, ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0),  ['Color'] = Color3.fromRGB(255, 255, 255), ['Font'] = "UI", ['Size'] = 13, ['Method'] = "None"}, -- // Tools Settings // "None" If Player Has No Tool Makes Text None // "Visible" If Player Has No Tool Makes Text Not Visible
+        ['Tracers'] = {['Enabled'] = false, ['Color'] = Color3.fromRGB(0, 255, 0), ['Outline'] = false, ['OutlineColor'] = Color3.fromRGB(0, 0, 0), ['Thickness'] = 0.6, ['UnlockTracers'] = false}, -- // Tracers Settings
+        ['Skeletons'] = {['Enabled'] = false, ['Color'] = Color3.fromRGB(0, 255, 0), ['AddHeadDot'] = false, ['Size'] = 5, ['NumSides'] = 14}, -- // Skeleton Settings
+        ['Highlight'] = {['Enabled'] = false, ['OutlineColor'] = Color3.fromRGB(0, 255, 0), ['OutlineTransparency'] = 0.10, ['FillColor'] = Color3.fromRGB(255, 255, 255), ['FillTransparency'] = 1, ['HealthColor'] = false}, -- // Highlight Settings
+        ['Flags'] = {['Enabled'] = true, ['Desynced'] = true, ['Moving'] = true, ['Dead'] = true, ['Standing'] = true, ['DesyncColor'] = Color3.fromRGB(255, 255, 255), ['MovingColor'] = Color3.fromRGB(255, 255, 255), ['DeadColor'] = Color3.fromRGB(255, 255, 255), ['StandingColor'] = Color3.fromRGB(255, 255, 255), ['Outline'] = true, ['OutlineColor'] = Color3.fromRGB(0, 0, 0), ['Font'] = "UI", ['Size'] = 13}, -- // Flags Settings
+        ['MaxDistance'] = {['Enabled'] = true, ['Distance'] = 100, ['FadeOut'] = true}, -- // How Far The ESP Works
+        ['TargetColor'] = {['Enabled'] = true, ['Color'] = Color3.fromRGB(255, 0, 0), ['Method'] = "Aim Assist"}, -- // Target Settings // Targets ESP Colors Change // "Silent Aim" Changes ESP Colors For Silent Aim Target // "Aim Assist" Changes ESP Colors For Aim Assist Target
+        ['FriendColor'] = {['Enabled'] = true, ['Color'] = Color3.fromRGB(0, 255, 0)}, -- // Target Settings // Friends ESP Colors Change // Target Bypass // Doesnt Use Max Distance For Target
+	},
+	Antilock = { -- // Antilock Settings
+        ['Enabled'] = false, -- // Enables Antilock
+        ['HoldMode'] = false, -- // Enables Hold Mode // You Have To Hold The Key Down For Antilock To Enable
+        ['Stats'] = true, -- // Enables Stats GUI That Displays Players X Velocity, Y Velocity, Z Velocity
+        ['UseKeybind'] = true, -- // Use Antilock Keybind
+        ['Keybind'] = "V", -- // Antilock Keybind
+        ['Method'] = "Custom", -- // "Custom" Uses Custom X, Y, Z For Antilock // "Multiplier" Multiplies Your Humanoids Velocity When You Move // "Disabler" Disables Prediction // "Spinbot" When You Stand Still You Cant Be Hit // "Shake" Shakes Your Character Very Fast
+        ['DisableOnHealth'] = {['Enabled'] = false, ['Health'] = 5}, -- // Disables When Humanoids Health Is Equal To Or Lower Than The Health Chosen
+        ['DesyncAngles'] = 500, -- // Desync Angles ( How Fast You Spin ) // Must Have "Spinbot" On
+        ['Power'] = 10, -- // Multiplier Power // Must Have "Multiplier" On
+        ['CustomValue'] = { -- // Custom Velocity Values // Must Have "Custom", "Shake", "Spinbot" On
+            ['X'] = 6000, -- // Custom X Value
+            ['Y'] = 2300, -- // Custom Y Value
+            ['Z'] = 4000, -- // Custom Z Value
+        },
+    },
+	AutoPrediction = { -- // Automatically Changes Silent Aim Prediction Based On Ping
+        ['Enabled'] = false, -- // Enables Auto Prediction
+        ['UseBestSettings'] = false, -- // Uses Best Settings Based On Ping // Doesnt Use Settings Below
+        ['Type'] = "Silent Aim", -- // "Silent Aim" Changes The Silent Aim Prediction Based On Ping // "Aim Assist" Changes The Aim Assist Prediction Based On Ping
+        ['Delay'] = 0.12, -- // The Rate The Prediction Changes
+        ['Ping_10'] = 0.12423, -- // Prediction When Ping Is 10
+	    ['Ping_20'] = 0.12588, -- // Prediction When Ping Is 20
+	    ['Ping_30'] = 0.11, -- // Prediction When Ping Is 30
+        ['Ping_40'] = 0.125, -- // Prediction When Ping Is 40
+        ['Ping_50'] = 0.12731, -- // Prediction When Ping Is 50
+        ['Ping_60'] = 0.119, -- // Prediction When Ping Is 60
+        ['Ping_70'] = 0.1347, -- // Prediction When Ping Is 70
+        ['Ping_80'] = 0.136, -- // Prediction When Ping Is 80
+        ['Ping_90'] = 0.130340, -- // Prediction When Ping Is 90
+        ['Ping_100'] = 0.1455, -- // Prediction When Ping Is 100
+        ['Ping_110'] = 0.143765, -- // Prediction When Ping Is 110
+        ['Ping_120'] = 0.156692, -- // Prediction When Ping Is 120
+	    ['Ping_130'] = 0.1223333, -- // Prediction When Ping Is 130
+        ['Ping_140'] = 0.15, -- // Prediction When Ping Is 140
+	    ['Ping_150'] = 0.16, -- // Prediction When Ping Is 150
+	    ['Ping_160'] = 0.1923111, -- // Prediction When Ping Is 160
+	    ['Ping_170'] = 0.19284, -- // Prediction When Ping Is 170
+	    ['Ping_180'] = 0.166547, -- // Prediction When Ping Is 180
+	    ['Ping_190'] = 0.165566, -- // Prediction When Ping Is 190
+        ['Ping_200'] = 0.165589, -- // Prediction When Ping Is 200
+    },
+}
